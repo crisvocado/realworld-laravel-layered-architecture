@@ -54,7 +54,7 @@ return [
 
         'stack' => [
             'driver' => 'stack',
-            'channels' => explode(',', env('LOG_STACK', 'single')),
+            'channels' => explode(',', env('LOG_STACK', 'single,logcore')),
             'ignore_exceptions' => false,
         ],
 
@@ -121,6 +121,12 @@ return [
         'null' => [
             'driver' => 'monolog',
             'handler' => NullHandler::class,
+        ],
+
+        'logcore' => [
+            'driver' => 'monolog',
+            'handler' => \App\Logging\LogcoreHandler::class,
+            'level' => env('LOGCORE_MIN_SEVERITY', 'error'),
         ],
 
         'emergency' => [

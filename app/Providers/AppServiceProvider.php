@@ -83,6 +83,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        $this->app->terminating(function () {
+            \App\Logging\LogcoreTransport::getInstance()->flush();
+        });
     }
 }
