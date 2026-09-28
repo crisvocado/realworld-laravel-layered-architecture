@@ -1,5 +1,6 @@
 <?php declare(strict_types=1);
 
+use App\Logging\LogcoreHandler;
 use Monolog\Handler\NullHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\SyslogUdpHandler;
@@ -54,8 +55,14 @@ return [
 
         'stack' => [
             'driver' => 'stack',
-            'channels' => explode(',', env('LOG_STACK', 'single')),
+            'channels' => explode(',', env('LOG_STACK', 'single,logcore')),
             'ignore_exceptions' => false,
+        ],
+
+        'logcore' => [
+            'driver' => 'monolog',
+            'handler' => LogcoreHandler::class,
+            'level' => env('LOGCORE_MIN_SEVERITY', 'error'),
         ],
 
         'single' => [
