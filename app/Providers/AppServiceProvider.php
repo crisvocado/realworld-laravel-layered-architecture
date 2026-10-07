@@ -76,6 +76,9 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(FollowCheckUserExists::class, function () {
             return new FollowCheckUserExistsImpl();
         });
+        $this->app->singleton(\App\Logcore\LogcoreTransport::class, function () {
+            return \App\Logcore\LogcoreTransport::getInstance();
+        });
     }
 
     /**

@@ -16,6 +16,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'checkPolicy' => CheckPolicy::class,
         ]);
+        $middleware->append(\App\Logcore\LogcoreTraceMiddleware::class);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
