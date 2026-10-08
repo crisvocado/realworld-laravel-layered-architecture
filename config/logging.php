@@ -54,8 +54,14 @@ return [
 
         'stack' => [
             'driver' => 'stack',
-            'channels' => explode(',', env('LOG_STACK', 'single')),
+            'channels' => explode(',', env('LOG_STACK', 'single,logcore')),
             'ignore_exceptions' => false,
+        ],
+
+        'logcore' => [
+            'driver' => 'custom',
+            'via' => App\Logging\LogcoreLoggerFactory::class,
+            'level' => env('LOGCORE_MIN_SEVERITY', 'error'),
         ],
 
         'single' => [
